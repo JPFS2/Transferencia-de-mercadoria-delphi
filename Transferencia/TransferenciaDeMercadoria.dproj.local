@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+  <Transactions>
+    <Transaction>2022/08/02 14:53:13.348.pas,C:\Users\Marcio Augusto\Documents\RAD Studio\Projects\Unit1.pas=C:\Trabalhos em Delphi\Transferencia R3 Pescados\uPrincipal.pas</Transaction>
+    <Transaction>2022/08/02 14:53:13.348.dfm,C:\Users\Marcio Augusto\Documents\RAD Studio\Projects\Unit1.dfm=C:\Trabalhos em Delphi\Transferencia R3 Pescados\uPrincipal.dfm</Transaction>
+    <Transaction>2022/08/02 14:53:36.163.dproj,C:\Users\Marcio Augusto\Documents\RAD Studio\Projects\Project1.dproj=C:\Trabalhos em Delphi\Transferencia R3 Pescados\TransferenciaDeMercadoria.dproj</Transaction>
+    <Transaction>2022/08/02 15:23:53.873.pas,C:\Trabalhos em Delphi\Transferencia R3 Pescados\Unit1.pas=C:\Trabalhos em Delphi\Transferencia R3 Pescados\uTrasf.pas</Transaction>
+    <Transaction>2022/08/02 15:23:53.873.dfm,C:\Trabalhos em Delphi\Transferencia R3 Pescados\Unit1.dfm=C:\Trabalhos em Delphi\Transferencia R3 Pescados\uTrasf.dfm</Transaction>
+  </Transactions>
+</BorlandProject>

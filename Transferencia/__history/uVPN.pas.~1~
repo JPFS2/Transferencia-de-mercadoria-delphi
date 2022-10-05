@@ -1,0 +1,94 @@
+unit uVPN;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, UModelo, AdvGlowButton, ACBrBase, ACBrMail, DASQLMonitor,
+  UniSQLMonitor, DB, MemDS, DBAccess, Uni, IdBaseComponent, IdComponent,
+  IdTCPConnection, IdTCPClient, IdExplicitTLSClientServerBase, IdFTP, ImgList,
+  cxGraphics, AdvOfficeStatusBar, ExtCtrls, Grids, DBGrids;
+
+type
+  TfrmVPN = class(TfrmModelo)
+    btnSair: TAdvGlowButton;
+    DBGrid1: TDBGrid;
+    procedure btnSairClick(Sender: TObject);
+    procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure DBGrid1DblClick(Sender: TObject);
+    procedure DBGrid1KeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure FormCreate(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmVPN: TfrmVPN;
+
+implementation
+
+uses UPrincipal;
+
+{$R *.dfm}
+
+procedure TfrmVPN.btnSairClick(Sender: TObject);
+begin
+  inherited;
+close;
+end;
+
+procedure TfrmVPN.DBGrid1DblClick(Sender: TObject);
+var
+EndrecoAtual: String;
+begin
+  inherited;
+
+TRY
+if frmPincipal.UniConnection1.Connected then
+   EndrecoAtual:=frmPincipal.UniConnection1.Server;
+
+EnderecoDoBanco:=frmPincipal.qryVPN.FieldByName('IP').AsString;
+frmPincipal.UniConnection1.Disconnect;
+frmPincipal.UniConnection1.Server:=frmPincipal.qryVPN.FieldByName('IP').AsString;
+frmPincipal.UniConnection1.Connect;
+EXCEPT
+  Application.MessageBox('Não foi possível conectar à filial desejada','Atenção',MB_ICONEXCLAMATION);
+  EnderecoDoBanco:='';
+  frmPincipal.UniConnection1.Server:=EndrecoAtual;
+  Exit;
+
+END;
+frmPincipal.qryEmpresa.Close;
+frmPincipal.qryEmpresa.OPEN;
+frmPincipal.pstatus.Panels[13].text   := 'Servidor: ' + frmPincipal.UniConnection1.SERVER+' | Data Base: '+frmPincipal.UniConnection1.Database;
+CLOSE;
+end;
+
+procedure TfrmVPN.DBGrid1KeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  inherited;
+if key=vk_return then
+   DBGrid1DblClick(sender);
+end;
+
+procedure TfrmVPN.FormCreate(Sender: TObject);
+begin
+  inherited;
+frmPincipal.qryVPN.Close;  
+frmPincipal.qryVPN.Open;
+end;
+
+procedure TfrmVPN.FormKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  inherited;
+if Key=vk_escape then
+if btnSair.Enabled then
+   btnSair.Click;
+end;
+
+end.

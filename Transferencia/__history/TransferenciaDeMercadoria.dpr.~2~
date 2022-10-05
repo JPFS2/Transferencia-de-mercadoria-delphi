@@ -1,0 +1,18 @@
+program TransferenciaDeMercadoria;
+
+uses
+  Forms,
+  uPrincipal in 'uPrincipal.pas' {frmPincipal},
+  UModelo in 'UModelo.pas' {frmModelo},
+  frmLogin in 'frmLogin.pas' {Login};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TfrmPincipal, frmPincipal);
+  Application.CreateForm(TfrmModelo, frmModelo);
+  Application.CreateForm(TLogin, Login);
+  Application.Run;
+end.

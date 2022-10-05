@@ -1,0 +1,57 @@
+unit uPrincipal;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, DB, MemDS, DBAccess, Uni, UniProvider, SQLiteUniProvider;
+
+type
+  TForm1 = class(TForm)
+    ConectSQLite: TUniConnection;
+    SQLiteUniProvider1: TSQLiteUniProvider;
+    qryVPN: TUniQuery;
+    dscVPN: TDataSource;
+    uOrigem: TUniConnection;
+    UniQuery1: TUniQuery;
+    uDestino: TUniConnection;
+    UniQuery2: TUniQuery;
+    Button1: TButton;
+    procedure Button1Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Form1: TForm1;
+
+implementation
+
+{$R *.dfm}
+
+procedure TForm1.Button1Click(Sender: TObject);
+begin
+if not qryVPN.Active then
+       qryVPN.Open;
+uDestino.Disconnect;
+uDestino.Server:=qryVPN.FieldByName('ip').AsString;
+
+if qryVPN.FieldByName('ip').AsString=uOrigem.Server then
+begin
+  Application.MessageBox('Os bancos de dados estão no mesmo endereço','Atenção',MB_ICONERROR);
+  Exit;
+end;
+
+   try
+     uDestino.Connect;
+   except
+     Application.MessageBox(pchar( 'Não foi possível conectar no banco de dadeos DESTINO: '+#13+#13+qryVPN.FieldByName('ip').AsString)
+
+     ,'Atenção',MB_ICONEXCLAMATION);
+   end;
+
+end;
+
+end.
