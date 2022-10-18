@@ -55,7 +55,7 @@ frmPincipal.uDestino.Disconnect;
 frmPincipal.uDestino.Server:=frmPincipal.qryVPN.FieldByName('IP').AsString;
 frmPincipal.uDestino.Connect;
 EXCEPT
-  Application.MessageBox('Não foi possível conectar à filial desejada','Atenção',MB_ICONEXCLAMATION);
+  Application.MessageBox('NÃ£o foi possÃ­vel conectar Ã  filial desejada','AtenÃ§Ã£o',MB_ICONEXCLAMATION);
   EnderecoDoBanco:='';
   frmPincipal.uDestino.Server:=EndrecoAtual;
   Exit;
@@ -89,6 +89,7 @@ begin
 if Key=vk_escape then
 if btnSair.Enabled then
    btnSair.Click;
+   
 end;
 
 end.
